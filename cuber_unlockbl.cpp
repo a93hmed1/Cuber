@@ -282,8 +282,10 @@ int sign_image(char* in, char* out){
 	/*
 	Final check of the output file
 	*/
-	std::cerr << std::endl << "[ STATUS ] Checking created image... \n";
-	check_image(out);
+    //we don't have an hash so we cant check the created image
+
+	//std::cerr << std::endl << "[ STATUS ] Checking created image... \n";
+	//check_image(out);
 
 	return 0;
 }
