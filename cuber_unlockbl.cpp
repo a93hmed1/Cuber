@@ -251,8 +251,6 @@ int sign_image(char* in, char* out){
 	unsigned char signature[SIGNATURE_SIZE];
 	memset(signature, 0, SIGNATURE_SIZE);
 	//sha256_buffer(image, imagesize_actual, hash);
-    printf("debug: imagefilesize, :%d\n",imagefilesize);
-    printf("debug: image %s\n",image);
 
 	/*
 	Create signature with given hash
@@ -265,7 +263,7 @@ int sign_image(char* in, char* out){
 	If the signature is created successfully AND the signature passes the check, the signature will be written into the image buffer, which will written to the output file
 	*/
 	if (sig != -1){
-		std::cerr << std::endl << "[ STATUS ] Checking created signature... \n";
+		std::cerr << std::endl << "[ STATUS ] Writing encripted file... \n";
 //		if (verify_image(image, signature, imagesize_actual) == 0){
 //			memcpy(image + imagesize_actual, signature, SIGNATURE_SIZE);
 //			fwrite(image, finalimagesize, 1, imageoutput);
@@ -371,7 +369,6 @@ int verify_image(unsigned char *image_ptr, unsigned char *signature_ptr, unsigne
 	Decrypt hash
 	*/
 	RSA_public_decrypt(SIGNATURE_SIZE, signature_ptr, plain_text, rsa_key, RSA_PKCS1_PADDING);
-printf("debug:plain_text %s\n",plain_text);
 	/*
 	Hash the image
 	*/
