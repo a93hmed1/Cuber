@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	if (!(argc == 3 || argc == 4)) {
 		std::cerr << "[ ERROR ] Incorrect number of arguments" << std::endl << std::endl;
 		std::cerr << "[ USAGE ] cuber <option> <arguments>" << std::endl;
-		std::cerr << "  -c, --check /path/to/image.img				checks if image would pass signature verification" << std::endl;
+//		std::cerr << "  -c, --check /path/to/image.img				checks if image would pass signature verification" << std::endl;
 		std::cerr << "  -s, --sign /path/to/input/file.img /path/to/output/file.img	creates a signature and outputs a signed image" << std::endl;
 		return -1;
 	}
@@ -106,7 +106,7 @@ int check_image(char* in){
 	*/
 /*	unsigned kernel_actual;
 	unsigned ramdisk_actual; */
-	unsigned imagesize_actual;
+//	unsigned imagesize_actual;
 /*	unsigned dt_actual;
 	unsigned page_size = hdr->page_size;
 	unsigned page_mask = hdr->page_size - 1;
@@ -132,7 +132,7 @@ int check_image(char* in){
 	/*
 	Verify the image.
 	*/
-	verify_image(image, image + imagesize_actual, imagesize_actual);
+	//verify_image(image, image + imagesize_actual, imagesize_actual);
 	
 	return 0;
 }
@@ -191,7 +191,7 @@ int sign_image(char* in, char* out){
 	*/
 /*	unsigned kernel_actual;
 	unsigned ramdisk_actual; */
-	unsigned imagesize_actual;
+//	unsigned imagesize_actual;
 /*	unsigned dt_actual;
 	unsigned page_size = hdr->page_size;
 	unsigned page_mask = hdr->page_size - 1;
@@ -200,7 +200,7 @@ int sign_image(char* in, char* out){
 	ramdisk_actual = ROUND_TO_PAGE(hdr->ramdisk_size, page_mask);
 	dt_actual = ROUND_TO_PAGE(hdr->dt_size, page_mask);
 	free(hdr);
-
+*/
 	/*
 	Calculate size of the "real" image
 	*/
@@ -243,11 +243,11 @@ int sign_image(char* in, char* out){
 		return -1;
 	}
 
-    imagesize_actual = imagefilesize;
+//    imagesize_actual = imagefilesize;
 	/*
 	Hash the real image
 	*/
-	unsigned char hash[65];
+//	unsigned char hash[65];
 	unsigned char signature[SIGNATURE_SIZE];
 	memset(signature, 0, SIGNATURE_SIZE);
 	//sha256_buffer(image, imagesize_actual, hash);
@@ -319,7 +319,8 @@ Function to verify a given image and signature.
 Reference implementation in the Little Kernel source in "platform/msm_shared/image_verify.c"
 Returns -1 if somethings fails otherwise 0
 */
-int verify_image(unsigned char *image_ptr, unsigned char *signature_ptr, unsigned int image_size)
+//int verify_image(unsigned char *image_ptr, unsigned char *signature_ptr, unsigned int image_size)
+int verify_image(unsigned char *signature_ptr)
 {
 	X509 *x509_certificate = NULL;
 	EVP_PKEY *pub_key = NULL;
